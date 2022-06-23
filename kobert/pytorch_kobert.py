@@ -21,8 +21,7 @@ import gluonnlp as nlp
 
 from kobert import download, get_tokenizer
 
-
-def get_pytorch_kobert_model(ctx="cpu", cachedir=".cache"):
+def get_pytorch_kobert_model(model_path, cachedir=".cache"):
     def get_kobert_model(model_path, vocab_file, ctx="cpu"):
         bertmodel = BertModel.from_pretrained(model_path, return_dict=False)
         device = torch.device(ctx)
@@ -49,7 +48,7 @@ def get_pytorch_kobert_model(ctx="cpu", cachedir=".cache"):
     model_path = os.path.join(os.path.expanduser(cachedir), "kobert_from_pretrained")
     # download vocab
     vocab_path = get_tokenizer()
-    return get_kobert_model(model_path, vocab_path, ctx)
+    return get_kobert_model(model_path, vocab_path)
 
 
 if __name__ == "__main__":
